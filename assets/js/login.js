@@ -9,6 +9,7 @@ $(function() {
         $('.reg-box').hide();
         $('.login').show();
     });
+
     // 从layui中获取form对象
     var form = layui.form;
     //通过form.verify()函数自定义校验规则
@@ -22,6 +23,9 @@ $(function() {
                 return '两次密码不一致!'
             }
         }
+    });
+    $.ajaxPrefilter(function(options) {
+        options.url = 'http://ajax.frontend.itheima.net' + options.url;
     });
     // 注册账号 监听注册表单的提交事件
     var layer = layui.layer;
@@ -42,7 +46,7 @@ $(function() {
         }
         $.ajax({
             type: 'post',
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             data,
             success: function(res) {
                 if (res.status !== 0) {
@@ -50,6 +54,23 @@ $(function() {
                 }
                 layer.msg(res.message);
                 $('#link-login').click();
+            }
+        })
+    })
+
+    // 登录监听
+    $('#form_login').on('submit', function(e) {
+        e.preventDefault();
+        $.ajax({
+            method: 'POST',
+            url: '/api/login',
+            data: $(this).serialize(),
+            success: function(res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message);
+                }
+                localStorage.setItem('token', res.token)
+                location.href = 'index.html';
             }
         })
     })
