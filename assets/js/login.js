@@ -24,11 +24,9 @@ $(function() {
             }
         }
     });
-    $.ajaxPrefilter(function(options) {
-        options.url = 'http://ajax.frontend.itheima.net' + options.url;
-    });
+
     // 注册账号 监听注册表单的提交事件
-    var layer = layui.layer;
+    // var layer = layui.layer;
     $('#form-reg').on('submit', function(e) {
         e.preventDefault();
         /* $.post('http://ajax.frontend.itheima.net/api/reguser', {
