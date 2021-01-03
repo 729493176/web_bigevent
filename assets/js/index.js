@@ -39,8 +39,9 @@ function renderAvatar(user) {
     $('#welcome').html('欢迎&nbsp;&nbsp;' + name);
     // 3.设置头像
     if (user.user_pic !== null) {
+        $('.text-avatar').hide();
         $('.layui-nav-img').attr('src', user.user_pic).show();
-        $('.text-avatat').hide();
+
     } else {
         // 文本头像
         var first = name[0].toUpperCase()
