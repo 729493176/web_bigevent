@@ -20,11 +20,11 @@ $(function() {
         $.ajax({
             method: 'POST',
             url: '/my/updatepwd',
-            // data: $(this).serialize(),
-            data: {
-                oldpwd: 111111,
-                newpwd: 1111111
-            },
+            data: $(this).serialize(),
+            // data: {
+            //     oldpwd: 111111,
+            //     newpwd: 1111111
+            // },
             success: function(res) {
                 if (res.status !== 0) {
                     return layui.layer.msg('更新密码失败！')
